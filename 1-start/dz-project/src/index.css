@@ -13,10 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 a {
-  font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: #a8aebf;
 }
 
 a:hover {
@@ -25,10 +32,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
+  background: #121829;
 }
 
 h1 {
