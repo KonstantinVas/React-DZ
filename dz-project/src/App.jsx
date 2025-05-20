@@ -4,8 +4,9 @@ import Paragraph from './components/Paragraph/Paragraph';
 import MainContainer from './components/MainContainer/MainContainer';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import FilmList from './components/FilmList/FilmList';
+import { UserContext } from './context/user.context';
 const INITIAL_DATA = [
 	{
 		id: 1,
@@ -58,26 +59,29 @@ function App() {
 				onClick() {
 					console.log('Нажата');
 				},
-				placeholder: 'Введите название',
-				className: 'input' + ' ' + 'input-search'
+				placeholder: 'Введите название'
 			},
 			formLogin: {
+				title: 'Вход',
 				type: 'text',
-				text: 'Войти в профиль',
-				onClick() {
-					console.log('Нажата');
-				},
+				text: 'Войти',
 				placeholder: 'Ваше имя',
-				className: 'input'
+				className: 'input',
+				name: 'login'
 			}
 		}
 	];
 
+	const {login, error} = useContext(UserContext);
 	const [films, _setFilm] = useState(INITIAL_DATA);
+
+	const handleLogin = (value) => {
+		return login(value);
+	};
 
 	return (
 		<>
-			<Header></Header>
+			<Header/>
 			<MainContainer>
 				<Headline title={data[0].title}/>
 				<Paragraph text={data[0].text}/>
@@ -86,10 +90,22 @@ function App() {
 					text={data[1].formSearch.text} 
 					onClick={data[1].formSearch.onClick}
 					placeholder={data[1].formSearch.placeholder}
-					className={data[1].formSearch.className}
+					className={data[1].formLogin.className}
 				/>
 			</MainContainer>
 			<FilmList films={films}/>
+			<MainContainer>
+				<Headline title={data[1].formLogin.title}/>
+				{error && <div className="error-message">{error}</div>}
+				<Form 
+					type={data[1].formLogin.type} 
+					text={data[1].formLogin.text} 
+					placeholder={data[1].formLogin.placeholder}
+					className={data[1].formLogin.className}
+					onSubmit={handleLogin}
+					name={data[1].formLogin.name}
+				/>
+			</MainContainer>
 		</>
 	);
 }
