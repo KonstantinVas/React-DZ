@@ -1,8 +1,19 @@
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import type { CardProps } from '../../components/Card/Card.props';
 
 export function Film() {
-	const { id } = useParams();
+	const data = useLoaderData() as {
+		short: {
+			name: string;
+			description: string;
+			rating: string;
+			image: string;
+			imdbid: string;
+		}
+	};
+
+	const film = data.short;
 	return <>
-		Фильм - {id}
+		Фильм - {film.name}
 	</>;
 }

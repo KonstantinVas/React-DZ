@@ -18,8 +18,8 @@ type FormLogin = {
 };
 
 export type FormData = {
-    formSearch?: FormSearch;
-    formLogin?: FormLogin;
+    formSearch: FormSearch;
+    formLogin: FormLogin;
 };
 
 export type AppData = [TextData, FormData];

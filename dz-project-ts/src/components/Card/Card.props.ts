@@ -1,8 +1,10 @@
 import type { LiHTMLAttributes } from 'react';
 
 export interface CardProps extends LiHTMLAttributes<HTMLElement> {
-    id: string,
-    src: string;
+    imdbId: string
     title: string;
+    year: number;
     rating: number;
+    poster: string;
+    actors: string;
 }

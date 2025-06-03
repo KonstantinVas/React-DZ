@@ -8,27 +8,40 @@ import { Login } from './Pages/Login/Login';
 import { Favorites } from './Pages/Favorites/Favorites';
 import { Film } from './Pages/Film/Film';
 import { UserContextProvider } from './context/user.context';
+import axios from 'axios';
+import { RequireAuth } from './helpers/RequireAuth';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Layout />,
+		element: <RequireAuth><Layout /></RequireAuth>,
 		children: [
 			{
 				path: '/',
 				element: <Main />
 			},
 			{
-				path: '/login',
-				element: <Login />
-			},
-			{
 				path: '/favorites',
 				element: <Favorites />
 			},
 			{
-				path: '/movie/:id',
-				element: <Film />
+				path: '/film/:id',
+				element: <Film />,
+				errorElement: <>Ошибка</>,
+				loader: async ({ params }) => {
+					const { data } = await axios.get(`https://search.imdbot.workers.dev/?tt=${params.id}`);
+					return data;
+				}
+			}
+		]
+	},
+	{
+		path: '/auth',
+		element: <Layout />,
+		children: [
+			{
+				path: 'login',
+				element: <Login />
 			}
 		]
 	}

@@ -1,12 +1,25 @@
 import type { HTMLAttributes } from 'react';
 
-export interface FormProps extends HTMLAttributes<HTMLFormElement> {
-    type?: string;
-    text?: string;
-    placeholder?: string;
-    onLoginSubmit?: (value: string) => boolean;
-    className?: string;
-    name?: string;
+type BaseFormProps = HTMLAttributes<HTMLFormElement> & {
+    placeholder: string;
+    className: string;
     btnClassName: string;
-}
+    name: string;
+    type: string;
+    text: string;
+};
 
+
+type LoginFormProps = BaseFormProps & {
+    variant: 'login';
+    onLoginSubmit: (value: string) => boolean;
+    onSearchSubmit?: never;
+};
+
+type SearchFormProps = BaseFormProps & {
+    variant: 'search';
+    onSearchSubmit: (query: string) => void;
+    onLoginSubmit?: never;
+};
+
+export type FormProps = LoginFormProps | SearchFormProps;

@@ -4,8 +4,10 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 import type { AppData } from '../../App.props';
 import Form from '../../components/Form/Form';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
+	const navigate = useNavigate();
 
 	const data: AppData = [
 		{
@@ -30,7 +32,8 @@ export function Login() {
 
 	const { login, error } = useContext(UserContext);
 
-	const handleLogin = (value: string) => {
+	const onLoginSubmit = (value: string) => {
+		navigate('/');
 		return login(value);
 	};
 
@@ -39,12 +42,13 @@ export function Login() {
 			<Headline>Вход</Headline>
 			{error && <div className="error-message">{error}</div>}
 			<Form
+				variant='login'
 				type={data[1].formLogin?.type}
 				text={data[1].formLogin?.text}
-				placeholder={data[1].formLogin?.placeholder}
-				className={data[1].formLogin?.className}
-				onLoginSubmit={handleLogin}
-				name={data[1].formLogin?.name}
+				placeholder={data[1].formLogin.placeholder}
+				className={data[1].formLogin.className}
+				onLoginSubmit={onLoginSubmit} // передаем обработчик
+				name={data[1].formLogin.name}
 				btnClassName='btn-login'
 			/>
 		</MainContainer>

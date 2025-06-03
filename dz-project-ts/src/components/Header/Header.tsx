@@ -7,7 +7,7 @@ function Header() {
 	const { currentUser, logout } = useContext(UserContext);
 
 	let loginOrLogout = <>
-		<NavLink to={'/login'} className={styles['login-btn']}>Войти</NavLink>
+		<NavLink to={'/auth/login'} className={styles['login-btn']}>Войти</NavLink>
 		<img className={styles.login} src="/login.svg" alt="Иконка входа в личный кабинет" />
 	</>;
 	if (currentUser) {
