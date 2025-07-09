@@ -1,22 +1,21 @@
-import './Input.css';
-import {useState} from 'react';
+import styles from './Input.module.css';
+import cn from 'classnames';
 
-function Input({type, placeholder, className}) {
-	const [inputData, setInputData] = useState('');
-
-	const inputChange = (event) => {
-		setInputData(event.target.value);
-	};
-
+function Input({ type, placeholder, className, ref, name, value, onChange }) {
 	return (
 		<input 
-			className={className}
+			className={cn(styles[className], {
+				[styles['input-search']] : type === 'search'
+			})}
+			ref={ref}
 			type={type} 
 			placeholder={placeholder} 
-			value={inputData} 
-			onChange={inputChange} 
+			value={value} 
+			onChange={onChange}
+			name={name}
 		/>    
 	);
 }
+
 
 export default Input;
