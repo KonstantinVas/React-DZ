@@ -2,9 +2,12 @@ import styles from './Header.module.css';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context.tsx';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store.ts';
 
 function Header() {
 	const { currentUser, logout } = useContext(UserContext);
+	const items = useSelector((s: RootState) => s.favorites);
 
 	let loginOrLogout = <>
 		<NavLink to={'/auth/login'} className={styles['login-btn']}>Войти</NavLink>
@@ -17,6 +20,7 @@ function Header() {
 			<button onClick={logout} className={styles['logout-btn']}>Выйти</button>
 		</>;
 	}
+	console.log(items);
 
 	return (
 		<header className={styles.header}>
@@ -30,6 +34,7 @@ function Header() {
 					{loginOrLogout}
 				</div>
 			</div>
+			{items.films.length}
 		</header>
 	);
 }

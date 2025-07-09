@@ -73,6 +73,15 @@
     height: 24px;
 }
 
+.film-list_text:hover,
 .film-list_text:hover::before {
     filter: invert(41%) sepia(79%) saturate(4240%) hue-rotate(226deg) brightness(94%) contrast(102%);
+}
+
+.film-list_text-active {
+    color: #37D8A7;
+}
+
+.film-list_text-active::before {
+    filter: invert(57%) sepia(63%) saturate(477%) hue-rotate(117deg) brightness(96%) contrast(101%);
 }

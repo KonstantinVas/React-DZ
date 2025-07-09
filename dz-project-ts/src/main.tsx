@@ -7,14 +7,16 @@ import { Main } from './Pages/Main/Main';
 import { Login } from './Pages/Login/Login';
 import { Favorites } from './Pages/Favorites/Favorites';
 import { Film } from './Pages/Film/Film';
-import { UserContextProvider } from './context/user.context';
 import axios from 'axios';
-import { RequireAuth } from './helpers/RequireAuth';
+// import { RequireAuth } from './helpers/RequireAuth';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+{/* <RequireAuth></RequireAuth> */ }
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <RequireAuth><Layout /></RequireAuth>,
+		element: <Layout />,
 		children: [
 			{
 				path: '/',
@@ -47,10 +49,10 @@ const router = createBrowserRouter([
 	}
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<UserContextProvider>
+		<Provider store={store}>
 			<RouterProvider router={router} />
-		</UserContextProvider>
+		</Provider>
 	</StrictMode>
 );

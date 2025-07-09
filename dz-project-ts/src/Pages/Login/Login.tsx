@@ -47,7 +47,7 @@ export function Login() {
 				text={data[1].formLogin?.text}
 				placeholder={data[1].formLogin.placeholder}
 				className={data[1].formLogin.className}
-				onLoginSubmit={onLoginSubmit} // передаем обработчик
+				onLoginSubmit={onLoginSubmit}
 				name={data[1].formLogin.name}
 				btnClassName='btn-login'
 			/>
